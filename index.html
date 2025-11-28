@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sahban Nurizkky Profil - Web</title>
+    <meta name="description" content="Tautan dan profil Sahban Nurizkky (Teks Profil Bergerak)."/>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* ==========================================
+           1. VARIABLE & GENERAL STYLES (TRINITY DARK)
+        ============================================= */
+        :root{
+            --main-black: #000000;
+            --accent-green: #39ff14;
+            --accent-red: #ff004f;
+            --card-dark: #1a1a1a;
+            --blood-red-dark: #8B0000; 
+            --text-light: #f0f0f0;
+            --text-secondary: #999999;
+            --glow-trinity: 0 0 8px rgba(57, 255, 20, 0.6), 0 0 12px rgba(255, 0, 79, 0.4); 
+            --glow-hover: 0 0 20px var(--accent-green), 0 0 10px var(--accent-red);
+            --white-transparent: rgba(255, 255, 255, 0.1); 
+            
+            --max-depth: 100vh; /* Kedalaman jatuh */
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-light);
+            overflow-x:hidden;
+            cursor: default;
+        }
+
+        body {
+            /* --- BACKGROUND GAMBAR --- */
+            background: 
+                linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://files.catbox.moe/yrn560.jpeg') center center / cover no-repeat fixed;
+            
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 50px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-red);
+        }
+
+        /* ==========================================
+           2. EFEK ANGKA/HURUF JATUH (MATRIX STYLE)
+        ============================================= */
+        
+        @keyframes fall {
+            to {
+                transform: translateY(var(--max-depth));
+            }
+        }
+        
+        #falling-blooms {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; 
+            z-index: 1; 
+            overflow: hidden;
+        }
+        
+        #falling-blooms span {
+            position: absolute;
+            top: -50px; 
+            color: var(--accent-green);
+            font-size: 14px;
+            opacity: 0.7;
+            text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+            line-height: 1;
+        }
+
+
+        /* ==========================================
+           3. CONTAINER UTAMA & PROFILE HEADER
+        ============================================= */
+        .profile-container {
+            position: relative;
+            z-index: 10; 
+            width: 100%;
+            max-width: 400px; 
+            padding: 30px 10px; 
+            text-align: center;
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .profile-pic {
+            width: 130px; 
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 5px solid var(--accent-red);
+            box-shadow: 0 0 20px var(--accent-red);
+            transition: all 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .username {
+            font-size: 28px; 
+            font-weight: 900; 
+            margin-bottom: 5px;
+            color: var(--text-light);
+            text-shadow: 0 0 8px var(--accent-green);
+        }
+
+        .tagline {
+            font-size: 16px;
+            margin-bottom: 20px; 
+            color: var(--text-secondary);
+        }
+
+        /* --- TEKS MOTO (BERGERAK/SCROLLING) --- */
+        .profile-moto {
+            overflow: hidden; 
+            white-space: nowrap;
+            display: flex; 
+            justify-content: center; 
+            
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--blood-red-dark); 
+            margin-bottom: 35px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(255, 0, 79, 0.8);
+            
+            animation: scrolling-text 20s linear infinite; 
+        }
+        
+        @keyframes scrolling-text {
+            0% {
+                transform: translateX(100%); 
+            }
+            100% {
+                transform: translateX(-100%); 
+            }
+        }
+
+
+        /* ==========================================
+           4. TOMBOL TAUTAN
+        ============================================= */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; 
+            gap: 15px; 
+            margin-bottom: 40px;
+        }
+
+        .link-button {
+            transition: all 0.3s ease;
+            box-shadow: var(--glow-trinity);
+            color: var(--text-light);
+            background: var(--white-transparent); 
+            border: 1px solid var(--accent-red);
+        }
+
+        .link-button:hover {
+            transform: scale(1.1); 
+            box-shadow: var(--glow-hover); 
+            background: rgba(255, 255, 255, 0.9);
+            border-color: var(--accent-green);
+            color: var(--main-black); 
+        }
+        
+        /* --- TOMBOL SOSIAL MEDIA (LINGKARAN KECIL) --- */
+        .button-group .link-button {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%; 
+            font-size: 20px;
+            
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            line-height: 1; 
+        }
+        
+        /* --- TAUTAN UTAMA (PIL VERTIKAL) --- */
+        .main-links-gothic {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            gap: 15px; 
+            padding: 0; 
+        }
+        
+        .main-links-gothic .link-button {
+            width: 80%; 
+            max-width: 320px;
+            padding: 15px 20px;
+            
+            border-radius: 9999px; 
+            
+            box-shadow: 0 0 8px var(--accent-red); 
+            background-color: var(--white-transparent); 
+            border: 1px solid var(--accent-green);
+            
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-light);
+            text-align: left;
+            
+            display: flex;
+            align-items: center;
+        }
+        
+        .main-links-gothic .link-button i {
+            margin-right: 15px;
+            font-size: 20px;
+            color: var(--accent-red);
+            line-height: 1; 
+        }
+        
+        .main-links-gothic .link-button:hover i {
+            color: var(--main-black);
+        }
+
+        .main-links-gothic .link-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 15px var(--accent-green);
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--main-black); 
+        }
+
+
+        /* ==========================================
+           5. FOOTER
+        ============================================= */
+        .footer {
+            margin-top: 40px;
+            font-size: 13px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            width: 100%;
+            text-align: center;
+            text-shadow: 0 0 2px var(--accent-green);
+        }
+    </style>
+
+</head>
+
+<body>
+    
+    <div id="falling-blooms"></div>
+    
+    <div class="profile-container">
+
+        <img class="profile-pic" src="https://files.catbox.moe/bl7nvd.jpg" alt="Profile Picture"> 
+        <div class="username">Sahban Nurizkky</div>
+        <div class="tagline">• The handsome • The newbie</div>
+        
+        <div class="profile-moto">
+            HELLO, MY NAME IS SAHBAN NURIZKKY
+        </div>
+        
+        <div class="tagline" style="margin-top: 25px;">My Contact</div>
+        
+        <div class="button-group">
+            <a class="link-button" href="https://t.me/itzbnzx4" target="_blank" title="Telegram">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+
+            <a class="link-button" href="https://wa.me/6283169447768" target="_blank" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+
+            <a class="link-button" href="https://github.com/azzahraalifa279-del" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        
+        <div class="main-links-gothic">
+            <a class="link-button" href="https://banzoffc-web.vercel.app" target="_blank">
+                <i class="fas fa-globe"></i> Visit My Store
+            </a>
+            <a class="link-button" href="https://whatsapp.com/channel/0029VbB83za0VycMdXvNDy3e" target="_blank">
+                <i class="fab fa-whatsapp"></i> Visit My Channel WhatsApp 
+            </a>
+        </div>
+
+
+        <div class="footer">
+            Sahban Nurizkky &copy; 2025 | Dark Trinity Theme
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('falling-blooms');
+        // Karakter yang digunakan untuk efek Matrix
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{};:.,<>/?|';
+        const numberOfCharacters = 50; 
+
+        function getRandomChar() {
+            return characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+
+        function createFallingChar() {
+            const char = document.createElement('span');
+            char.textContent = getRandomChar();
+            
+            // Posisi X acak 
+            const randomX = Math.random() * 100; 
+            char.style.left = `${randomX}vw`;
+            
+            // Kecepatan jatuh acak (antara 5s dan 20s)
+            const randomDuration = 5 + Math.random() * 15;
+            char.style.animation = `fall ${randomDuration}s linear infinite`;
+            
+            // Delay mulai acak 
+            const randomDelay = Math.random() * 20;
+            char.style.animationDelay = `-${randomDelay}s`; 
+            
+            container.appendChild(char);
+
+            // Reset karakter dan posisi X saat animasi selesai
+            char.addEventListener('animationiteration', () => {
+                char.textContent = getRandomChar();
+                const newRandomX = Math.random() * 100;
+                char.style.left = `${newRandomX}vw`;
+            });
+        }
+
+        // Buat sejumlah karakter yang ditentukan
+        for (let i = 0; i < numberOfCharacters; i++) {
+            createFallingChar();
+        }
+    </script>
+</body>
+</html>
